@@ -1,9 +1,9 @@
-import type { Post } from '$models/Post.js';
+import type { Post } from '$lib/models/Post';
 import { redirect } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types.js';
-import type { User } from '$models/User.js';
+import type { PageServerLoad } from './$types';
+import type { User } from '$lib/models/User';
 import { PUBLIC_BACKEND_URL } from '$env/static/public';
-import { allowedTypeParams, type TypeParam } from '$models/ProfilePostType.js';
+import { allowedTypeParams, type TypeParam } from '$lib/models/ProfilePostType';
 
 const getPosts = async (userId: string): Promise<Post[]> => {
 	const response = await fetch(`${PUBLIC_BACKEND_URL}/api/user/${userId}/posts`);
@@ -19,7 +19,7 @@ export const load: PageServerLoad = async ({ url, params }) => {
 	const userId = params.id;
 
 	if (userId === "1") {
-		redirect(307, "/profile");
+		redirect(303, "/profile");
 	}
 
 	const typeParam = (url.searchParams.get('type') ?? '') as TypeParam;

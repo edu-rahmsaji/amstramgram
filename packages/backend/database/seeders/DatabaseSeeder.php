@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $userCount = 10;
-        $postCountPerUser = 50;
+        $postCountPerUser = 5;
 
         User::factory($userCount)
             ->has(

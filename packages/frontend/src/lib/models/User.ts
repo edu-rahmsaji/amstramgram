@@ -1,4 +1,4 @@
-export type User = {
+export interface User {
 	id: number;
 	nickname: string;
 	isPrivate: boolean;
@@ -15,7 +15,7 @@ export type User = {
 	joinedOn: string;
 }
 
-export type SimplifiedUser = {
+export interface SimplifiedUser {
 	id: number;
 	nickname: string;
 	firstName: string;

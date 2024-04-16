@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { IconArrowNarrowLeft } from '@tabler/icons-svelte';
 	import type { PageData } from './$types.js';
-	import Post from '$lib/shared/Post/Post.svelte';
+	import Post from '$lib/components/shared/Post/PostCard.svelte';
 	import { PUBLIC_BACKEND_URL } from '$env/static/public';
-	import type { ApiResponse } from '$models/ApiResponse.js';
+	import type { ApiResponse } from '$lib/models/ApiResponse';
+    import { addToast } from '../../../../lib/stores/toast.js';
 
 	export let data: PageData;
 
@@ -15,9 +16,11 @@
 		const result: ApiResponse = await response.json();
 
 		if (!result.success) {
-			alert(result.message);
+			addToast({ type: "error", message: result.message })
 			return;
 		}
+
+		addToast({ type: "success", message: "Post deleted successfully." })
 
 		history.back();
 	};

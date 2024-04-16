@@ -15,6 +15,7 @@
 Renders a link represented as an icon for the navbar.
 
 If the current path is the same as the href, the css will highlight it.
+
 -->
 
 <li class="relative h-full aspect-square sm:aspect-auto">

@@ -1,30 +1,26 @@
 <script lang="ts">
-	import type { PageData } from './$types.js';
-	import { onMount } from 'svelte';
-	import Nav from '$lib/profile/Nav.svelte';
-	import UserInfo from '$lib/profile/UserInfo.svelte';
-	import PostTypeSelection from '$lib/profile/PostTypeSelection.svelte';
-	import Content from '$lib/profile/Content.svelte';
+	import type { PageData } from './$types';
+	import Nav from '$lib/components/profile/Nav.svelte';
+	import UserInfo from '$lib/components/profile/UserInfo.svelte';
+	import PostTypeSelection from '$lib/components/profile/PostTypeSelection.svelte';
+	import Content from '$lib/components/profile/Content.svelte';
 
 	export let data: PageData;
-	$: ({ type, user } = data);
-
-	onMount(() => {
-		document.title = 'My Profile - Amstramgram';
-	});
 </script>
 
-{#if !user}
-	<p>Unable to retrieve user data. Please try again later.</p>
-{:else}
+<svelte:head>
+	<title>My Profile - Amstramgram</title>
+</svelte:head>
+
+<div class="relative w-full flex flex-col">
 	<Nav />
-	<UserInfo {user} />
-	<PostTypeSelection {type} />
+	<UserInfo />
+	<PostTypeSelection type={data.type} />
 	{#await data.posts}
 		<p>Loading the posts...</p>
 	{:then posts}
-		<Content {posts} {type} />
+		<Content {posts} type={data.type} />
 	{:catch}
 		<p>Something went wrong. Please try again later.</p>
 	{/await}
-{/if}
+</div>

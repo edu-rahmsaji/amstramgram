@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { PageData } from './$types.js';
 	import { onMount } from 'svelte';
-	import UserInfo from '$lib/profile/UserInfo.svelte';
-	import PostTypeSelection from '$lib/profile/PostTypeSelection.svelte';
-	import Content from '$lib/profile/Content.svelte';
+	import UserInfo from '$lib/components/profile/UserInfo.svelte';
+	import PostTypeSelection from '$lib/components/profile/PostTypeSelection.svelte';
+	import Content from '$lib/components/profile/Content.svelte';
 	import { IconMenu as MenuIcon, IconArrowNarrowLeft as BackIcon } from '@tabler/icons-svelte';
 
 	export let data: PageData;

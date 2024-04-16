@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Post } from "$models/Post.js";
-	import type { TypeParam } from "$models/ProfilePostType.js";
-	import Pics from "./Posts/Pics.svelte";
-	import Texts from "./Posts/Texts.svelte";
+	import type { Post } from "$lib/models/Post";
+	import type { TypeParam } from "$lib/models/ProfilePostType";
+	import Pics from "$lib/components/profile/Posts/Pics.svelte";
+	import Texts from "$lib/components/profile/Posts/Texts.svelte";
 
     export let posts: Post[] | undefined;
     export let type: TypeParam;

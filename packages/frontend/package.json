@@ -1,6 +1,6 @@
 {
 	"name": "amstramgram-frontend",
-	"version": "0.11.1",
+	"version": "0.12.0",
 	"author": "Sajidur Rahman",
 	"description": "The frontend of the Amstramgram project.",
 	"private": false,
@@ -17,7 +17,8 @@
 		"format": "prettier --write ."
 	},
 	"dependencies": {
-		"@tabler/icons-svelte": "^2.46.0"
+		"@tabler/icons-svelte": "^2.46.0",
+		"uuid": "^9.0.1"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
@@ -25,6 +26,7 @@
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@types/eslint": "8.56.0",
 		"@types/node": "^20.11.16",
+		"@types/uuid": "^9.0.8",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
 		"autoprefixer": "^10.4.17",

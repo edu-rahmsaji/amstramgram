@@ -2,8 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Follow;
-use App\Models\Post;
+use App\Models\{Post, User, Follow};
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,6 +15,15 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        /* $followings = Follow::where('follower_id', '=', $this->id);
+        $followingIds = $followings->pluck("followed_id");
+        $followingAccounts = UserResource::collection(User::find($followingIds));
+
+        $followers = Follow::where('followed_id', '=', $this->id);
+        $followerIds = $followers->pluck("follower_id");
+        $followerAccounts = UserResource::collection(User::find($followerIds)); */
+        $followingIds = Follow::where('follower_id', '=', $this->id)->get()->pluck("followed_id");
+
         return [
             'id' => $this->id,
             'nickname' => $this->nickname,
@@ -29,6 +37,8 @@ class UserResource extends JsonResource
                 'followerCount' => Follow::where('followed_id', '=', $this->id)->get()->count(),
                 'followingCount' => Follow::where('follower_id', '=', $this->id)->get()->count()
             ],
+            'followingIds' => $followingIds,
+            /* 'followers' => $followerAccounts, */
             'joinedOn' => $this->created_at
         ];
     }

@@ -17,20 +17,9 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
-        $imagesPaths = ['storage/posts/screen_1.png', 'storage/posts/screen_2.png', 'storage/posts/screen_3.png', 'storage/posts/screen_4.png', 'storage/posts/screen_5.png'];
-        $count = fake()->numberBetween(0, 5);
-
-        $randomIndices = [];
-        for ($i = 0; $i < $count; $i++) {
-            $randomIndices[] = array_rand($imagesPaths);
-        }
-
-        $randomImagePaths = array_values(Arr::only($imagesPaths, $randomIndices));
-
         return [
             'user_id' => fake()->numberBetween(1, 10),
-            'text' => fake()->text(),
-            'image_paths' => json_encode($randomImagePaths)
+            'text' => fake()->text()
         ];
     }
 }

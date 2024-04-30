@@ -18,9 +18,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('user', [UserController::class, 'readAll']);
 Route::get('user/{id}/posts/liked', [PostLikeController::class, 'likedPosts']);
 Route::get('user/{user}', [UserController::class, 'read']);
 Route::post('user', [UserController::class, 'create']);
+Route::put('user/{id}', [UserController::class, 'update']);
+Route::delete('user/{id}', [UserController::class, 'destroy']);
+
+Route::get('user/{followerId}/follow/{followedId}', [FollowController::class, 'follow']);
+Route::get('user/{followerId}/unfollow/{followedId}', [FollowController::class, 'unfollow']);
+
+Route::get('user/{userId}/like/{postId}', [PostLikeController::class, 'like']);
+Route::get('user/{userId}/unlike/{postId}', [PostLikeController::class, 'unlike']);
 
 Route::get('user/{user}/followers', [FollowController::class, 'followers']);
 Route::get('user/{user}/following', [FollowController::class, 'following']);

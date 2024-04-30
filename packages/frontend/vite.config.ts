@@ -6,8 +6,7 @@ export default defineConfig({
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	},
-	server: {
-		host: 'localhost',
-		port: 5173
+	optimizeDeps: {
+		exclude: ["@tabler/icons-svelte"]
 	}
 });

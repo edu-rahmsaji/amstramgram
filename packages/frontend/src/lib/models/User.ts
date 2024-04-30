@@ -11,6 +11,7 @@ export interface User {
 		followerCount: number;
 		followingCount: number;
 	};
+	followingIds: number[],
 	/** A parsable date. */
 	joinedOn: string;
 }

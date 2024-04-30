@@ -1,8 +1,8 @@
 import { PUBLIC_BACKEND_URL } from "$env/static/public";
 import type { User } from "$lib/models/User";
-import type { LayoutServerLoad } from "./$types.js";
+import type { LayoutServerLoad } from "./$types";
 
-const getUser = async (id: string): Promise<User | undefined> => {
+async function getUser(id: string): Promise<User | undefined> {
     try {
         const response = await fetch(`${PUBLIC_BACKEND_URL}/api/user/${id}`);
         return (await response.json()).data as User;
@@ -13,14 +13,9 @@ const getUser = async (id: string): Promise<User | undefined> => {
 }
 
 export const load: LayoutServerLoad = async ({ cookies }) => {
-    const id = cookies.get("id");
-
-    let user: User | undefined;
-    if (id) {
-        user = await getUser(id);
-    }
-
     return {
-        user: user
+        user: await getUser(cookies.get("id")!)
     }
 };
+
+

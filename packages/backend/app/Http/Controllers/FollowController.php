@@ -8,6 +8,22 @@ use App\Models\User;
 
 class FollowController extends Controller
 {
+    public function follow(int $followerId, int $followedId) {
+        $followObj = new Follow();
+        $followObj->follower_id = $followerId;
+        $followObj->followed_id = $followedId;
+
+        $followObj->save();
+
+        return ["success" => true];
+    }
+
+    public function unfollow(int $followerId, int $followedId) {
+        Follow::where("follower_id", "=", $followerId)->where("followed_id", "=", $followedId)->delete();
+
+        return ["success" => true];
+    }
+
     public function followers(User $user)
     {
         $followers = Follow::where('followed_id', '=', $user->id);

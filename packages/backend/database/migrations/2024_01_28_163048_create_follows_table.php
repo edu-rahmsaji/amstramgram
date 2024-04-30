@@ -16,11 +16,13 @@ return new class extends Migration
             $table->integer('followed_id');
             $table->foreign('followed_id')
                   ->references('id')
-                  ->on('users');
+                  ->on('users')
+                  ->onDelete('cascade');
             $table->integer('follower_id');
             $table->foreign('follower_id')
                   ->references('id')
-                  ->on('users');
+                  ->on('users')
+                  ->onDelete('cascade');
             $table->unique(['followed_id', 'follower_id']);
             $table->timestamps();
         });

@@ -19,7 +19,8 @@ return new class extends Migration
             $table->integer('user_id');
             $table->foreign('user_id')
                   ->references('id')
-                  ->on('users');
+                  ->on('users')
+                  ->onDelete('cascade');
             $table->text('text')->nullable();
             $table->json('image_paths')->nullable();
             $table->timestamps();

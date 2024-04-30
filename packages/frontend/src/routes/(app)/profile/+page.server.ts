@@ -4,26 +4,13 @@ import type { Actions, PageServerLoad } from './$types.js';
 import { PUBLIC_BACKEND_URL } from '$env/static/public';
 import { allowedTypeParams, type TypeParam } from '$lib/models/ProfilePostType.js';
 
-const getPosts = async (): Promise<Post[]> => {
-	const response = await fetch(`${PUBLIC_BACKEND_URL}/api/user/1/posts`);
-	return (await response.json()).data;
+const getPosts = async (userId: string): Promise<Post[]> => {
+	const response = await fetch(`${PUBLIC_BACKEND_URL}/api/user/${userId}/posts`);
+	return (await response.json()).data as Post[];
 }
 
-export const load: PageServerLoad = async ({ url }) => {
-	const typeParam = (url.searchParams.get('type') ?? '') as TypeParam;
-
-	if (!allowedTypeParams.includes(typeParam)) {
-		redirect(303, '/profile');
-	}
-
+export const load: PageServerLoad = async ({ cookies }) => {
 	return {
-		type: typeParam,
-		posts: getPosts()
+		posts: getPosts(cookies.get("id")!)
 	};
 };
-
-export const actions: Actions = {
-	default: async () => {
-		return fail(422, { message: "This functionality is not implemented yet." });
-	}
-}

@@ -1,36 +1,62 @@
 <script lang="ts">
-	import { IconArrowNarrowLeft } from '@tabler/icons-svelte';
-	import type { ActionData, PageData } from './$types.js';
-	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
+	import type { PageData } from './$types';
+	import IconChevronLeft from '@tabler/icons-svelte/IconChevronLeft.svelte';
+	import IconBan from '@tabler/icons-svelte/IconBan.svelte';
+	import IconEdit from '@tabler/icons-svelte/IconEdit.svelte';
+    import { PUBLIC_BACKEND_URL } from '$env/static/public';
+    import { addToast } from '$lib/stores/toast.js';
 
 	export let data: PageData;
-	export let form: ActionData;
 
-	onMount(async () => {
-		if (form?.success) {
-			await goto(`/posts/${data.post?.id}`)
-		}
-	})
+	async function edit(event: SubmitEvent & { currentTarget: EventTarget & HTMLFormElement; }) {
+		const text = new FormData(event.currentTarget).get("text")!.toString();
+
+		await fetch(`${PUBLIC_BACKEND_URL}/api/posts/${data.post.id}`, {
+			method: "PUT",
+			body: JSON.stringify({ text }),
+			headers: {
+                "content-type": "application/json"
+            }
+		});
+
+		data.post.text = text;
+		addToast({ type: "success", message: "Post updated successfully" });
+		history.back();
+	}
 
 	let text: string = data.post?.text ?? "";
 </script>
 
-<nav class="relative w-full min-h-[60px] px-5 flex justify-start items-center z-50">
-	<!-- svelte-ignore a11y-invalid-attribute -->
-	<a href="javascript:history.back()" class="flex gap-3 border-b-2 border-black py-1">
-        <IconArrowNarrowLeft class="text-black" />
-		<span>Back</span>
-    </a>
+<svelte:head>
+	<title>Editing a post - Amstramgram</title>
+</svelte:head>
+
+<nav class="relative w-full h-20 p-5 flex justify-start items-center">
+    <button on:click={() => history.back()} class="flex gap-5 py-2">
+        <IconChevronLeft />
+        <span>Back</span>
+    </button>
 </nav>
 {#if !data.post}
 	<p>Something went wrong. Please try again later.</p>
 {:else}
-	<form method="post">
+	<form on:submit|preventDefault={edit} class="relative w-full flex flex-col items-center px-5 gap-5">
+		<h1 class="text-xl">Editing a post</h1>
 		<input name="_method" type="hidden" value="PUT" />
-		<textarea name="text" class="mx-5 border border-blue-500 h-52" bind:value={text}></textarea>
-		<!-- svelte-ignore a11y-invalid-attribute -->
-		<a href="/posts/{data.post.id}">Cancel</a>
-		<button type="submit">Update</button>
+		<textarea name="text" rows={10} class="relative w-full rounded bg-gray-200 p-5 resize-none" bind:value={text}></textarea>
+		<div class="relative w-full h-[50px] flex justify-between items-center gap-5">
+            <button
+			on:click={() => history.back()}
+                type="button"
+                class="relative h-full flex-grow rounded bg-gray-700 text-white flex justify-center items-center gap-3"
+            >
+                <span>Cancel</span>
+                <IconBan class="text-white" />
+            </button>
+            <button type="submit" class="relative h-full flex-grow rounded bg-blue-700 text-white flex justify-center items-center gap-3">
+                <span>Update</span>
+                <IconEdit class="text-white" />
+            </button>
+        </div>
 	</form>
 {/if}

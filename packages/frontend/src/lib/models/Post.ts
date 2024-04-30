@@ -5,9 +5,8 @@ export interface Post {
 	/** A simplified version of a user. */
 	user: SimplifiedUser;
 	text: string;
-	/** A parsable string array. */
-	imagePaths: string;
 	likes: number;
+	userWhoLikedIds: number[],
 	/** A parsable date. */
 	postedAt: string;
 }

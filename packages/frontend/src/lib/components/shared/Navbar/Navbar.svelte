@@ -1,22 +1,15 @@
 <script lang="ts">
-    import { getContext } from 'svelte';
+	import HomeIcon from '@tabler/icons-svelte/IconHome.svelte';
+	import AddIcon from '@tabler/icons-svelte/IconCirclePlus.svelte';
+	import UserProfileIcon from '@tabler/icons-svelte/IconUserCircle.svelte';
+	import IconMenu2 from '@tabler/icons-svelte/IconMenu2.svelte';
+	import IconX from '@tabler/icons-svelte/IconX.svelte';
 	import Link from './Link.svelte';
-	import {
-		IconHome as HomeIcon,
-		IconCirclePlus as AddIcon,
-		IconUserCircle as UserProfileIcon,
-		IconMenu2,
-		IconX,
-        IconLogin2
-	} from '@tabler/icons-svelte';
-    import type { User } from '$lib/models/User';
-    import type { Writable } from 'svelte/store';
 
+	export let showAddPost: boolean;
 	let showFullMenu: boolean = false;
 
 	$: MenuIcon = showFullMenu ? IconX : IconMenu2;
-
-	const user = getContext<Writable<User | undefined>>("user");
 </script>
 
 <!--
@@ -30,13 +23,16 @@ Renders a responsive navbar.
 	class="xsm:hidden fixed bottom-0 left-0 w-full h-[60px] bg-white shadow-[0px_-4px_3px_rgba(50,50,50,0.25)] dark:shadow-[0px_-4px_3px_rgba(10,10,10,0.25)]"
 >
 	<ul class="relative w-full h-full py-[10px] flex justify-evenly items-center">
-		<Link href="/" label="Home" icon={HomeIcon} />
-		{#if $user}
-			<Link href="/posts/add" label="Add a post" icon={AddIcon} />
-			<Link href="/profile" label="Profile" icon={UserProfileIcon} />
-		{:else}
-			<Link href="/login" label="Login" icon={IconLogin2} />
-		{/if}
+		<Link href="/feed" label="Home" icon={HomeIcon} />
+		<li class="relative h-full aspect-square sm:aspect-auto">
+			<button on:click={() => (showAddPost = true)} class="relative h-full flex justify-center items-center rounded-md sm:px-5">
+				<svelte:component this={AddIcon} />
+				<p class="hidden sm:flex ml-[10px] relative h-full justify-center items-center">
+					Add a post
+				</p>
+			</button>
+		</li>
+		<Link href="/profile" label="Profile" icon={UserProfileIcon} />
 	</ul>
 </nav>
 

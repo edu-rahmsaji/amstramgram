@@ -10,11 +10,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'text', 'image_paths'];
-
-    protected $casts = [
-        'image_paths' => 'array'
-    ];
+    protected $fillable = ['user_id', 'text'];
 
     /**
      * Get the user that created this post.

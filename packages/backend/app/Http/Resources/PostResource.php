@@ -30,6 +30,7 @@ class PostResource extends JsonResource
             'text' => $this->text,
             'imagePaths' => $this->image_paths,
             'likes' => $likes,
+            'userWhoLikedIds' => PostLike::where('post_id', '=', $this->id)->get()->pluck("user_id"),
             'postedAt' => $this->created_at
         ];
     }

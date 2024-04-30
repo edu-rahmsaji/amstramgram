@@ -14,7 +14,7 @@
 
 	$: Icon = type === 'success' ? SuccessIcon : type === 'error' ? ErrorIcon : InfoIcon;
 	$: bgColor =
-		type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-300';
+		type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500';
 </script>
 
 <article class="relative w-full flex items-center gap-4 rounded p-4 text-neutral-50 {bgColor}" role="alert" transition:fade>

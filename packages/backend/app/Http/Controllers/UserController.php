@@ -27,7 +27,33 @@ class UserController extends Controller
         }
     }
 
+    public function update(Request $request, int $id) {
+        $user = User::where("id", "=", $id)->first();
+        $user->nickname = $request->nickname;
+        $user->is_private = $request->isPrivate;
+        $user->first_name = $request->firstName;
+        $user->last_name = $request->lastName;
+        $user->email = $request->email;
+        $user->password = $request->password;
+
+        if ($user->save()) {
+            return ['status' => true, 'message' => "User updated successfully"];       
+        } else {
+            return ['status' => false, 'message' => "An error has occurred whilst updating the user"];       
+        }
+    }
+
+    public function readAll() {
+        return ["success" => true, "data" => UserResource::collection(User::all())];
+    }
+
     public function read(User $user) {
         return new UserResource($user);
+    }
+
+    public function destroy(int $id) {
+        User::where("id", "=", $id)->first()->delete();
+
+        return ["success" => true];
     }
 }

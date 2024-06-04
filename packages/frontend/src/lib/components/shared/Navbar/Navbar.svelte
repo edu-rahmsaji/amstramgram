@@ -2,6 +2,7 @@
 	import HomeIcon from '@tabler/icons-svelte/IconHome.svelte';
 	import AddIcon from '@tabler/icons-svelte/IconCirclePlus.svelte';
 	import UserProfileIcon from '@tabler/icons-svelte/IconUserCircle.svelte';
+	import IconMessage from '@tabler/icons-svelte/IconMessage.svelte';
 	import IconMenu2 from '@tabler/icons-svelte/IconMenu2.svelte';
 	import IconX from '@tabler/icons-svelte/IconX.svelte';
 	import Link from './Link.svelte';
@@ -32,6 +33,7 @@ Renders a responsive navbar.
 				</p>
 			</button>
 		</li>
+		<Link href="/chat" label="Chat" icon={IconMessage} />
 		<Link href="/profile" label="Profile" icon={UserProfileIcon} />
 	</ul>
 </nav>

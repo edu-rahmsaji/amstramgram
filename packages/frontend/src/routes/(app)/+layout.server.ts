@@ -17,5 +17,3 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
         user: await getUser(cookies.get("id")!)
     }
 };
-
-

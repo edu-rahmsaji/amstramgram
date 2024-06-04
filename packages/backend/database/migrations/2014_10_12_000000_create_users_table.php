@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->text('biography')->nullable();
+            $table->string('avatarPath')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

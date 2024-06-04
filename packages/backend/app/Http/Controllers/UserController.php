@@ -11,16 +11,17 @@ class UserController extends Controller
 {
     public function create(Request $request)
     {
-        $userObj = new User;
-        $userObj->nickname = $request->nickname;
-        $userObj->is_private = $request->is_private;
-        $userObj->first_name = $request->first_name;
-        $userObj->last_name = $request->last_name;
-        $userObj->email = $request->email;
-        $userObj->password = $request->password;
-        $userObj->biography = $request->biography;
+        $user = new User;
+        $user->nickname = $request->nickname;
+        $user->is_private = $request->is_private;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->biography = $request->biography;
+        $user->avatarPath = $request->avatarPath;
 
-        if ($userObj->save()) {
+        if ($user->save()) {
             return ['status' => true, 'message' => "User created successfully"];       
         } else {
             return ['status' => false, 'message' => "An error has occurred while creating the user"];       
@@ -35,6 +36,7 @@ class UserController extends Controller
         $user->last_name = $request->lastName;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->avatarPath = $request->avatarPath;
 
         if ($user->save()) {
             return ['status' => true, 'message' => "User updated successfully"];       
@@ -55,5 +57,12 @@ class UserController extends Controller
         User::where("id", "=", $id)->first()->delete();
 
         return ["success" => true];
+    }
+
+    public function imageTest(Request $request) {
+        // Access from storage/avatars/...
+        $path = $request->file('avatar')->store('public/avatars');
+
+        return ["path" => asset($path)];
     }
 }

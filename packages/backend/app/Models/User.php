@@ -25,6 +25,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'avatarPath'
     ];
 
     /**
@@ -75,5 +76,13 @@ class User extends Authenticatable
      */
     public function likedPosts(): HasMany {
         return $this->hasMany(PostLike::class);
+    }
+
+    public function messagesSent(): HasMany {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    public function messagesReceived(): HasMany {
+        return $this->hasMany(Message::class, 'receiver_id');
     }
 }

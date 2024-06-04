@@ -4,6 +4,20 @@ This repository contains the backend implementation for the Amstramgram project.
 
 ## Getting Started
 
+### Prerequisites
+
+1. Install `choco` from an elevated command prompt. (https://chocolatey.org/install)
+
+```bash
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+```
+
+2. Install `make` using `choco`
+
+```bash
+choco install make
+```
+
 1. Update the `php.ini` file
 
 ```ini
@@ -14,7 +28,7 @@ upload_max_filesize = 2M -> upload_max_filesize = 50M   # Change from 2M to 50M
 
 2. Install the dependencies
 
-```ps1
+```bash
 composer install
 ```
 
@@ -37,12 +51,12 @@ CREATE DATABASE amstramgramdb;       # Don't forget the ;
 
 5. Run the database migrations and seed it.
 
-```ps1
-php artisan migrate --seed
+```bash
+make db
 ```
 
 6. Run the development server with a port
 
-```ps1
-php artisan serve --port=<port>
+```bash
+make run
 ```

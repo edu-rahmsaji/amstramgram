@@ -1,6 +1,6 @@
 {
 	"name": "amstramgram-frontend",
-	"version": "0.13.0",
+	"version": "0.14.0",
 	"author": "Sajidur Rahman",
 	"description": "The frontend of the Amstramgram project.",
 	"private": false,
@@ -18,6 +18,7 @@
 	},
 	"dependencies": {
 		"@tabler/icons-svelte": "^3.2.0",
+		"socket.io-client": "^4.7.5",
 		"uuid": "^9.0.1"
 	},
 	"devDependencies": {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\UserController;
@@ -24,6 +25,7 @@ Route::get('user/{user}', [UserController::class, 'read']);
 Route::post('user', [UserController::class, 'create']);
 Route::put('user/{id}', [UserController::class, 'update']);
 Route::delete('user/{id}', [UserController::class, 'destroy']);
+Route::post('user/image', [UserController::class, 'imageTest']);
 
 Route::get('user/{followerId}/follow/{followedId}', [FollowController::class, 'follow']);
 Route::get('user/{followerId}/unfollow/{followedId}', [FollowController::class, 'unfollow']);
@@ -42,3 +44,6 @@ Route::get('posts/{post}', [PostController::class, 'read']);
 Route::post('posts', [PostController::class, 'create']);
 Route::put('posts/{id}', [PostController::class, 'update']);
 Route::delete('posts/{post}', [PostController::class, 'delete']);
+
+Route::get('v2/{user_one_id}/chat/{user_two_id}', [MessageController::class, 'conversation']);
+Route::post('v2/{id}/chat', [MessageController::class, 'send']);

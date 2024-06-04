@@ -7,11 +7,17 @@
     import { addToast } from '$lib/stores/toast';
     import { PUBLIC_BACKEND_URL } from '$env/static/public';
     import { invalidateAll } from '$app/navigation';
+	import { initSocket } from "$lib/socket";
+	import { onMount } from "svelte";
 
 	export let data: LayoutServerData;
 	let showAddPost = false;
 
 	$user = data.user!;
+
+	onMount(async () => {
+		await initSocket($user.id)
+	})
 
 	async function submit(event: SubmitEvent & { currentTarget: EventTarget & HTMLFormElement; }) {
 		const formData = new FormData(event.currentTarget);

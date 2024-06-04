@@ -24,6 +24,14 @@ This file's purpose is to indicate general information about the project.
 
 `/packages` contains two directories, one for the backend, one for the frontend and one for the websocket client. See their dedicated README to get started.
 
+### Directories
+
+`/packages/frontend` includes the frontend of the app.
+
+`/packages/backend` includes the backend of the app.
+
+`/packages/websocket` includes the websocket client of the app.
+
 ## Author
 
 Sajidur Rahman

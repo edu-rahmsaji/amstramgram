@@ -42,11 +42,10 @@ io.on('connection', (socket) => {
     });
 
     socket.on('send_private_message', (message: PrivateMessage) => {
-        console.log("Received private message")
         socket.broadcast.to(sessions[message.receiver.id]).emit("receive_private_message", message);
     })
 });
 
-server.listen(process.env.APP_PORT || 4000, () => {
-    console.log(`[Server] Running on port ${process.env.APP_PORT || 4000}`);
+server.listen(process.env.APP_PORT || 5000, () => {
+    console.log(`[Server] Running on port ${process.env.APP_PORT || 5000}`);
 });

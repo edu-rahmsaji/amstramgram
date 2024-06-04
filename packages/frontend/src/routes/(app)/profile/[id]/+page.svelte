@@ -10,6 +10,7 @@
     import { user } from '$lib/stores/user';
     import { addToast } from '$lib/stores/toast';
     import { PUBLIC_BACKEND_URL } from '$env/static/public';
+    import IconUserFilled from '@tabler/icons-svelte/IconUserFilled.svelte';
 
     export let data: PageData;
 
@@ -22,7 +23,7 @@
 
     async function unfollow() {
         await fetch(`${PUBLIC_BACKEND_URL}/api/user/${$user.id}/unfollow/${data.user.id}`);
-        $user.followingIds = $user.followingIds.filter(id => id !== data.user.id);
+        $user.followingIds = $user.followingIds.filter((id) => id !== data.user.id);
         $user.meta.followingCount -= 1;
         data.user.meta.followerCount -= 1;
     }
@@ -43,8 +44,19 @@
         <p>Unable to retrieve user data. Please try again later.</p>
     {:else}
         <div
-            class="relative w-full min-h-[450px] flex flex-col justify-end p-5 gap-5 bg-blue-500 bg-center shadow-[inset_0_-350px_200px_-200px_rgba(17,17,17,1)]"
+            class="relative w-full min-h-[550px] flex flex-col justify-end p-5 gap-5 bg-blue-500 bg-center shadow-[inset_0_-350px_200px_-200px_rgba(17,17,17,1)]"
         >
+            {#if data.user.avatarPath}
+                {@const path = `${PUBLIC_BACKEND_URL}/${data.user.avatarPath}`}
+                <div
+                    style="background-image: url('{path}');"
+                    class="relative w-20 bg-cover bg-center aspect-square rounded-full flex justify-center items-center"
+                ></div>
+            {:else}
+                <div class="relative w-20 aspect-square bg-black rounded-full flex justify-center items-center">
+                    <IconUserFilled class="relative size-12 text-white" />
+                </div>
+            {/if}
             <h1 class="text-4xl text-white">{data.user.nickname}</h1>
             <h2 class="text-white">{data.user.firstName} {data.user.lastName}</h2>
             <div class="relative w-full flex justify-center gap-10">
@@ -56,7 +68,7 @@
             <div class="relative w-full h-[50px] flex justify-between items-center gap-5">
                 <button
                     on:click={() => {
-                        addToast({ type: "info", message: "This feature is not available yet." })
+                        addToast({ type: 'info', message: 'This feature is not available yet.' });
                     }}
                     type="button"
                     class="relative h-full flex-grow rounded bg-white text-black flex justify-center items-center gap-3"
@@ -64,8 +76,11 @@
                     <span>Message</span>
                     <IconMessagePlus />
                 </button>
-                {#if $user.followingIds.find(f => f === Number(data.userId))}
-                    <button on:click={unfollow} class="relative h-full flex-grow rounded bg-blue-700 text-white flex justify-center items-center gap-3">
+                {#if $user.followingIds.find((f) => f === Number(data.userId))}
+                    <button
+                        on:click={unfollow}
+                        class="relative h-full flex-grow rounded bg-blue-700 text-white flex justify-center items-center gap-3"
+                    >
                         <span>Followed</span>
                         <IconUserMinus />
                     </button>

@@ -25,7 +25,8 @@ class PostResource extends JsonResource
                 'id' => $user->id,
                 'nickname' => $user->nickname,
                 'firstName' => $user->first_name,
-                'lastName' => $user->last_name
+                'lastName' => $user->last_name,
+                'avatarPath' => $user->avatarPath
             ],
             'text' => $this->text,
             'imagePaths' => $this->image_paths,

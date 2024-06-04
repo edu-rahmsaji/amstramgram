@@ -50,7 +50,11 @@ __The third section displays:__
 <div class="relative w-full flex flex-col">
 	<div class="relative w-full h-20 flex">
 		<a href="/profile/{creator.id}" class="relative w-full h-full p-5 flex justify-start items-center gap-5 cursor-pointer">
-			<div class="relative h-full aspect-square rounded-full bg-black"></div>
+            {#if creator.avatarPath}
+			    <div class="relative h-full aspect-square rounded-full bg-center bg-cover" style="background-image: url('{PUBLIC_BACKEND_URL}/{creator.avatarPath}');"></div>
+            {:else}
+                <div class="relative h-full aspect-square rounded-full bg-black"></div>
+            {/if}
 			<div class="relative flex flex-col items-start justify-between">
 				<p class="font-medium">{creator.nickname}</p>
 				<p class="font-medium text-gray-500 text-xs">{formattedDate(postedAt)}</p>

@@ -25,7 +25,8 @@ Route::get('user/{user}', [UserController::class, 'read']);
 Route::post('user', [UserController::class, 'create']);
 Route::put('user/{id}', [UserController::class, 'update']);
 Route::delete('user/{id}', [UserController::class, 'destroy']);
-Route::post('user/image', [UserController::class, 'imageTest']);
+Route::post('user/{user}/avatar', [UserController::class, 'updateAvatar']);
+Route::delete('user/{user}/avatar', [UserController::class, 'deleteAvatar']);
 
 Route::get('user/{followerId}/follow/{followedId}', [FollowController::class, 'follow']);
 Route::get('user/{followerId}/unfollow/{followedId}', [FollowController::class, 'unfollow']);

@@ -6,6 +6,7 @@ export interface User {
 	lastName: string;
 	email: string;
 	biography: string;
+    avatarPath: string | null;
 	meta: {
 		postCount: number;
 		followerCount: number;
@@ -21,4 +22,5 @@ export interface SimplifiedUser {
 	nickname: string;
 	firstName: string;
 	lastName: string;
+    avatarPath: string | null;
 }

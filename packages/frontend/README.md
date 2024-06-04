@@ -6,19 +6,19 @@ This repository contains the frontend implementation for the Amstramgram project
 
 1. Install the dependencies
 
-```ps1
+```bash
 npm install
 ```
 
 2. Set up the environment variables. Set the port to the one you chose for the backend.
 
-```env
+```bash
 PUBLIC_BACKEND_URL="http://localhost:<port>"
 ```
 
 3. Run the development server
 
-```ps1
+```bash
 npm run dev
 ```
 

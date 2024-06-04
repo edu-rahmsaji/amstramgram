@@ -19,7 +19,6 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = $request->password;
         $user->biography = $request->biography;
-        $user->avatarPath = $request->avatarPath;
 
         if ($user->save()) {
             return ['status' => true, 'message' => "User created successfully"];       
@@ -36,7 +35,6 @@ class UserController extends Controller
         $user->last_name = $request->lastName;
         $user->email = $request->email;
         $user->password = $request->password;
-        $user->avatarPath = $request->avatarPath;
 
         if ($user->save()) {
             return ['status' => true, 'message' => "User updated successfully"];       
@@ -59,10 +57,21 @@ class UserController extends Controller
         return ["success" => true];
     }
 
-    public function imageTest(Request $request) {
-        // Access from storage/avatars/...
-        $path = $request->file('avatar')->store('public/avatars');
+    public function updateAvatar(Request $request, User $user) {
+        $filename = uniqid() . '.' . $request->file('avatar')->extension();
 
-        return ["path" => asset($path)];
+        // Access from /avatars/...
+        $request->file('avatar')->move(public_path("avatars"), $filename);
+
+        $user->avatarPath = "avatars/" . $filename;
+
+        $user->save();
+
+        return ["success" => true, "path" => $user->avatarPath];
+    }
+
+    public function deleteAvatar(Request $request, User $user) {
+        $user->avatarPath = null;
+        $user->save();
     }
 }

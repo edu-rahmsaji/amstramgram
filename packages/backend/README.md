@@ -18,6 +18,8 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 choco install make
 ```
 
+## Starting the project
+
 1. Update the `php.ini` file
 
 ```ini

@@ -39,7 +39,8 @@ class UserResource extends JsonResource
             ],
             'followingIds' => $followingIds,
             /* 'followers' => $followerAccounts, */
-            'joinedOn' => $this->created_at
+            'joinedOn' => $this->created_at,
+            'avatarPath' => $this->avatarPath
         ];
     }
 }

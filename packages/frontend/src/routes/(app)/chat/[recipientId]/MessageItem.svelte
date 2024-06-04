@@ -32,10 +32,10 @@
         <p>{message.content}</p>
     </div>
 {:else}
-    <div class="flex gap-5 mt-5 first:mt-0">
+    <div class="relative w-full flex gap-5 mt-5 first:mt-0">
         <div class="relative size-10 rounded-full bg-black"></div>
         <div class="relative w-[calc(100%-60px)] flex flex-col gap-2">
-            <div class="flex gap-2 items-baseline">
+            <div class="relative w-full flex gap-2 items-baseline">
                 <h2 class="text-lg">{message.sender.nickname}</h2>
                 <time class="text-gray-500 text-sm">{formatDate(message.sentAt)}</time>
             </div>

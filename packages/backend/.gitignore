@@ -2,7 +2,6 @@
 /node_modules
 /public/build
 /public/hot
-# /public/storage => Since I'm unable to generate images, I'll store dummy images for now.
 /storage/*.key
 /storage/app/avatars
 /vendor
@@ -18,3 +17,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/public/avatars
